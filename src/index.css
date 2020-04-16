@@ -15,3 +15,7 @@ code {
 .theme-bg{
   background: linear-gradient(#3EB9DE, #3A80DE);
 }
+
+.gray-bg{
+  background-color: #E5EFF5;
+}

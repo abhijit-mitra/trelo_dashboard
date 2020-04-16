@@ -26,6 +26,7 @@ module.exports = {
     camelcase: [0],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": [1],
+    "react/display-name": [0],
     "require-jsdoc": [
       "error",
       {

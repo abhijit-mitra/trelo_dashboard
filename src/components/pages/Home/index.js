@@ -1,7 +1,8 @@
 import React from 'react';
+import {OrganiseProjects} from '../../templates';
 
 const Home = (props) => (
-  <div>Home</div>
+  <OrganiseProjects/>
 );
 
 export default Home;

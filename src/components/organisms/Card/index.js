@@ -20,7 +20,7 @@ const Card = memo((props) => {
     }
   };
   return (
-    <div className="card p-3 my-3">
+    <div className="card p-2 my-3">
       {
         editMode?
           <form className="writeMode" onSubmit={handleSubmit}>

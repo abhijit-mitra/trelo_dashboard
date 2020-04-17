@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Input, Button} from '../../../atoms';
 
-const AddList = memo(({onSubmit, onCloseClick}) => {
+const AddList = memo(({onSubmit}) => {
   const [value, setValue] = useState('');
   const [showForm, setShowForm] = useState(false);
   const handleChange=({target: {value}})=>{
@@ -44,7 +44,6 @@ const AddList = memo(({onSubmit, onCloseClick}) => {
 
 AddList.propTypes={
   onSubmit: PropTypes.func.isRequired,
-  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default AddList;

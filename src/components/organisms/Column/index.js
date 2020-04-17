@@ -15,7 +15,7 @@ const Column = memo(({status, children}) => {
 });
 
 Column.propTypes={
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.array]),
   status: PropTypes.string.isRequired,
 };
 

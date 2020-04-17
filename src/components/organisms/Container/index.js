@@ -10,7 +10,7 @@ const Container = memo(({children}) => (
 ));
 
 Container.propTypes={
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.array]),
 };
 
 export default Container;

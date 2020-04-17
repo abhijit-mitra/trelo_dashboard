@@ -6,6 +6,7 @@ import {Input, Button} from '../../atoms';
 const Card = memo((props) => {
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(props.value);
+  const [deleted, setDeleted] = useState(false);
 
   const handleChange = ({target: {value}})=>{
     setValue(value);
@@ -14,7 +15,8 @@ const Card = memo((props) => {
     setEditMode((state)=>(!state));
   };
   const handleDelete = ()=>{
-
+    props.onCardDelete();
+    setDeleted(true);
   };
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -22,6 +24,9 @@ const Card = memo((props) => {
       setEditMode((state)=>(!state));
     }
   };
+  if (deleted) {
+    return <></>;
+  }
   return (
     <div className="card p-2 my-3">
       {
@@ -48,6 +53,7 @@ const Card = memo((props) => {
 
 Card.propTypes={
   value: PropTypes.string.isRequired,
+  onCardDelete: PropTypes.func.isRequired,
 };
 
 export default Card;

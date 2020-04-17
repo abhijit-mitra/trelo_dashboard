@@ -21,7 +21,7 @@ const List = memo(({status, cardData, listId, onSubmit}) => {
   return (
     <Column status={status}>
       {(Object.entries(cardData)||[]).map(([cardKey, cardValue])=>(
-        <Card key={cardKey} value={cardValue}/>
+        <Card key={cardKey} value={cardValue} onCardDelete={()=>{}}/>
       ))}
       {
         openNewCard?

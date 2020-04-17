@@ -35,7 +35,12 @@ const Card = memo((props) => {
             <div className="mb-3">
               <Input onChange={handleChange} value={value}/>
             </div>
-            <Button label='Save' type='submit'/>
+            <div className="d-flex align-items-center">
+              <div className="mr-3 d-inline-block">
+                <Button label='Save' type='submit' disabled={!value}/>
+              </div>
+              <i className="fas fa-times cursor-pointer" onClick={handleEditClick}></i>
+            </div>
           </form>:
           <div className='readMode d-flex'>
             <div className="w-75">

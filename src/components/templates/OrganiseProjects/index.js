@@ -21,6 +21,10 @@ const initialState={
     cards: {},
   },
   5: {
+    name: 'Ready For Release',
+    cards: {},
+  },
+  6: {
     name: 'Done',
     cards: {},
   },

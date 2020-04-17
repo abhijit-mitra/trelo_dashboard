@@ -1,26 +1,26 @@
 export const initialState={
   1: {
     name: 'Design',
-    cards: {},
+    cards: [],
   },
   2: {
     name: 'To Do',
-    cards: {},
+    cards: [],
   },
   3: {
     name: 'Development',
-    cards: {},
+    cards: [],
   },
   4: {
     name: 'QA',
-    cards: {},
+    cards: [],
   },
   5: {
     name: 'Ready For Release',
-    cards: {},
+    cards: [],
   },
   6: {
     name: 'Done',
-    cards: {},
+    cards: [],
   },
 };

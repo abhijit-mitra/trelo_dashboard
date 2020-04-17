@@ -29,14 +29,14 @@ const Card = memo((props) => {
     }
   };
   const handleDragOver=(e)=>{
-    props.onDragOver(props.listId, props.cardId);
+    props.onDragOver(props.listId, props.cardIndex);
   };
 
   const handleDragStart =(e)=>{
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', e.target.parentNode);
     // e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
-    props.onDragStart(props.cardId);
+    props.onDragStart(props.cardIndex, props.cardObj);
   };
   if (deleted) {
     return <></>;
@@ -78,7 +78,7 @@ const Card = memo((props) => {
 Card.propTypes={
   cardObj: PropTypes.object.isRequired,
   onCardDelete: PropTypes.func.isRequired,
-  cardId: PropTypes.number.isRequired,
+  cardIndex: PropTypes.number.isRequired,
   onDragOver: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,
   listId: PropTypes.number.isRequired,

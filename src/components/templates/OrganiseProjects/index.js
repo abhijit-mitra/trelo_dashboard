@@ -10,19 +10,11 @@ class OrganiseProjects extends PureComponent {
     this.state = initialState;
   }
   handleNewCardSubmit=(obj)=>{
-    const {state} = this;
-    const order = Object.entries(state[obj.listId].cards).length;
     this.setState((state)=>({
       ...state,
       [obj.listId]: {
         ...state[obj.listId],
-        cards: {
-          ...state[obj.listId].cards,
-          [Number(new Date().getTime())]: {
-            name: obj.value,
-            order,
-          },
-        },
+        cards: [...state[obj.listId].cards, {name: obj.value, id: (new Date().getTime())}],
       },
     }));
   };
@@ -35,36 +27,26 @@ class OrganiseProjects extends PureComponent {
       },
     }));
   };
-  handleDragStart = (cardId)=>{
-    this.draggedItem = cardId;
+  handleDragStart = (cardIndex, cardObj)=>{
+    this.dragedCardIndex = cardIndex;
+    this.draggedCardObj = cardObj;
   };
-  handleDragOver = (listId, cardId)=>{
-    const {draggedItem, state} = this;
-    const draggedOverItem = cardId;
-    // if the item is dragged over itself, ignore
-    if (!draggedItem || draggedItem === draggedOverItem) {
+  handleDragOver = (listId, cardIndex)=>{
+    const {dragedCardIndex, state, draggedCardObj} = this;
+    const draggedOverCardIndex = cardIndex;
+
+    if (dragedCardIndex === draggedOverCardIndex) {
       return;
     }
-    const draggedOverCard = state[listId].cards[cardId];
 
-    // filter out the currently dragged item
-    // const items = state[listId].cards[draggedItem];
+    const items = state[listId].cards.filter((item) => item.id !== draggedCardObj.id);
+    items.splice(draggedOverCardIndex, 0, draggedCardObj);
 
-    // add the dragged item after the dragged over item
-    // items.splice(index, 0, this.draggedItem);
-
-    // this.setState({items});
     this.setState((state)=>({
       ...state,
       [listId]: {
         ...state[listId],
-        cards: {
-          ...state[listId].cards,
-          [draggedItem]: {
-            ...state[listId].cards[draggedItem],
-            order: draggedOverCard.order,
-          },
-        },
+        cards: items,
       },
     }));
   };

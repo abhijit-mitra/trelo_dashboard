@@ -17,16 +17,14 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver}
   const handleCloseClick=()=>{
     setOpenNewCard(false);
   };
-  const entries = Object.entries(cardData);
-  const sortedList = entries.sort((a, b)=>(a[1].order-b[1].order));
   return (
     <Column status={status}>
       <div>
-        {sortedList.map(([cardKey, cardObj])=>(
+        {cardData.map((elm, index)=>(
           <Card
-            key={cardKey}
-            cardId={Number(cardKey)}
-            cardObj={cardObj}
+            key={index}
+            cardIndex={index}
+            cardObj={elm}
             listId={Number(listId)}
             onCardDelete={()=>{}}
             onDragStart={onDragStart}
@@ -45,7 +43,7 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver}
 
 List.propTypes={
   status: PropTypes.string.isRequired,
-  cardData: PropTypes.object.isRequired,
+  cardData: PropTypes.array.isRequired,
   listId: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,

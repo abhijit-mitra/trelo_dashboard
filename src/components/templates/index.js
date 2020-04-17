@@ -1,4 +1,4 @@
-import OrganiseProjects from './OrganiseProjects/_index';
+import OrganiseProjects from './OrganiseProjects';
 
 export {
   OrganiseProjects,

@@ -7,7 +7,7 @@ const Column = memo(({status, children}) => {
   return (
     <div>
       <div className="py-4 px-2 gray-bg rounded mx-3 d-inline-block" style={ColStyle}>
-        <h5>{status}</h5>
+        {status && <h5>{status}</h5>}
         {children}
       </div>
     </div>

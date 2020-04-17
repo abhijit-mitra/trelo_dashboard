@@ -15,9 +15,14 @@ const NewCard = memo((props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="my-3">
-        <Input onChange={handleChange} value={value}/>
+        <Input onChange={handleChange} value={value} placeholder='Enter Card Title...'/>
       </div>
-      <Button label='Save' type='submit' disabled={!value}/>
+      <div className="d-flex align-items-center">
+        <div className="mr-3 d-inline-block">
+          <Button label='Save' type='submit' disabled={!value}/>
+        </div>
+        <i className="fas fa-times cursor-pointer" onClick={props.onCloseClick}></i>
+      </div>
     </form>
   );
 },
@@ -26,6 +31,7 @@ const NewCard = memo((props) => {
 NewCard.propTypes={
   onSubmit: PropTypes.func.isRequired,
   listId: PropTypes.number.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default NewCard;

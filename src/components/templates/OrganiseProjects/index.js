@@ -1,6 +1,7 @@
 import React, {memo, useState} from 'react';
-import {Container} from '../../organisms';
+import {Container, Column} from '../../organisms';
 import List from './List';
+import AddList from './AddList';
 
 const initialState={
   1: {
@@ -39,6 +40,15 @@ const OrganiseProjects = memo((props) => {
       },
     }));
   };
+  const handleNewListSubmit=(value)=>{
+    setState((state)=>({
+      ...state,
+      [Number(new Date().getTime())]: {
+        name: value,
+        cards: {},
+      },
+    }));
+  };
   return (
     <Container>
       {
@@ -52,6 +62,9 @@ const OrganiseProjects = memo((props) => {
           />
         ))
       }
+      <Column status=''>
+        <AddList onSubmit={handleNewListSubmit}/>
+      </Column>
     </Container>
   );
 });

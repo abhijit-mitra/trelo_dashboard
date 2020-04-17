@@ -6,13 +6,16 @@ import {Card, Column} from '../../../organisms';
 import NewCard from './NewCard';
 
 const List = memo(({status, cardData, listId, onSubmit}) => {
-  const [openNewCard, setOpenNewCard] = useState(true);
+  const [openNewCard, setOpenNewCard] = useState(false);
   const handleButtonClick = ()=>{
     setOpenNewCard(true);
   };
   const handleSubmit = (obj)=>{
     setOpenNewCard(false);
     onSubmit(obj);
+  };
+  const handleCloseClick=()=>{
+    setOpenNewCard(false);
   };
 
   return (
@@ -22,8 +25,8 @@ const List = memo(({status, cardData, listId, onSubmit}) => {
       ))}
       {
         openNewCard?
-          <NewCard onSubmit={handleSubmit} listId={listId}/>:
-          <Button label='+ Add Another Card' onClick={handleButtonClick}/>
+          <NewCard onSubmit={handleSubmit} listId={listId} onCloseClick={handleCloseClick}/>:
+          <Button label='+ Add Card' onClick={handleButtonClick}/>
       }
     </Column>
   );

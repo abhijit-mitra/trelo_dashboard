@@ -1,5 +1,6 @@
 import React, {memo, useState} from 'react';
-import {Container, Column} from '../../organisms';
+import {Container} from '../../organisms';
+import List from './List';
 
 const initialState={
   1: {
@@ -42,7 +43,7 @@ const OrganiseProjects = memo((props) => {
     <Container>
       {
         Object.entries(state).map(([key, value])=>(
-          <Column
+          <List
             status={value.name}
             key={key}
             cardData={value.cards}

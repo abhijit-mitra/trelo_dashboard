@@ -19,3 +19,7 @@ code {
 .gray-bg{
   background-color: #E5EFF5;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

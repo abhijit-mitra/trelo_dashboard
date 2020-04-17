@@ -1,7 +1,7 @@
 import React, {memo, useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {Input, Button} from '../../atoms';
+import {Input, Button} from '../../../atoms';
 
 const NewCard = memo((props) => {
   const [value, setValue] = useState('');

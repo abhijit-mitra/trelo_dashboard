@@ -13,6 +13,9 @@ const Card = memo((props) => {
   const handleEditClick = ()=>{
     setEditMode((state)=>(!state));
   };
+  const handleDelete = ()=>{
+
+  };
   const handleSubmit=(e)=>{
     e.preventDefault();
     if (value.length) {
@@ -34,7 +37,8 @@ const Card = memo((props) => {
               {value}
             </div>
             <div className="w-25 d-flex justify-content-end align-items-center">
-              <i className="fas fa-pencil-alt cursor-pointer" onClick={handleEditClick}></i>
+              <i className="fas fa-pencil-alt cursor-pointer mr-3" onClick={handleEditClick}></i>
+              <i className="far fa-trash-alt cursor-pointer" onClick={handleDelete}></i>
             </div>
           </div>
       }

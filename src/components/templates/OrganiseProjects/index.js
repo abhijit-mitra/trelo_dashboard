@@ -24,7 +24,7 @@ class OrganiseProjects extends PureComponent {
       ...state,
       [Number(new Date().getTime())]: {
         name: value,
-        cards: {},
+        cards: [],
       },
     }));
   };

@@ -50,12 +50,25 @@ class OrganiseProjects extends PureComponent {
       },
     }));
   };
+  handleCardEditComplete=(listId, cardIndex, value)=>{
+    const {state} = this;
+    const cards = [...state[listId].cards];
+    cards[cardIndex] = {...cards[cardIndex], name: value};
+    this.setState((state)=>({
+      ...state,
+      [listId]: {
+        ...state[listId],
+        cards,
+      },
+    }));
+  }
   render() {
     const {state,
       handleNewCardSubmit,
       handleDragStart,
       handleDragOver,
       handleNewListSubmit,
+      handleCardEditComplete,
     } = this;
     return (
       <Container>
@@ -69,6 +82,7 @@ class OrganiseProjects extends PureComponent {
               onSubmit={handleNewCardSubmit}
               onDragStart={handleDragStart}
               onDragOver={handleDragOver}
+              onCardEditComplete={handleCardEditComplete}
             />
           ))
         }

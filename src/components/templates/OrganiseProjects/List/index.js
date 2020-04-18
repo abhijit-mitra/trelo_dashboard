@@ -5,7 +5,7 @@ import {Button} from '../../../atoms';
 import {Card, Column} from '../../../organisms';
 import NewCard from './NewCard';
 
-const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver}) => {
+const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver, onCardEditComplete}) => {
   const [openNewCard, setOpenNewCard] = useState(false);
   const handleButtonClick = ()=>{
     setOpenNewCard(true);
@@ -22,13 +22,14 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver}
       <div>
         {cardData.map((elm, index)=>(
           <Card
-            key={index}
+            key={elm.id}
             cardIndex={index}
             cardObj={elm}
             listId={Number(listId)}
             onCardDelete={()=>{}}
             onDragStart={onDragStart}
             onDragOver={onDragOver}
+            onEditComplete={onCardEditComplete}
           />
         ))}
         {
@@ -46,6 +47,7 @@ List.propTypes={
   cardData: PropTypes.array.isRequired,
   listId: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onCardEditComplete: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,
   onDragOver: PropTypes.func.isRequired,
 };

@@ -26,6 +26,7 @@ const Card = memo((props) => {
     e.preventDefault();
     if (value.length) {
       setEditMode((state)=>(!state));
+      props.onEditComplete(props.listId, props.cardIndex, value);
     }
   };
   const handleDragOver=(e)=>{
@@ -43,7 +44,7 @@ const Card = memo((props) => {
   }
   return (
     <div className='wrapper' onDragOver={handleDragOver}>
-      <div className="card p-2 my-3"
+      <div className="card p-2 my-3 cursor-pointer"
         draggable={true}
         onDragStart={handleDragStart}
       >
@@ -82,6 +83,7 @@ Card.propTypes={
   onDragOver: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,
   listId: PropTypes.number.isRequired,
+  onEditComplete: PropTypes.func.isRequired,
 };
 
 export default Card;

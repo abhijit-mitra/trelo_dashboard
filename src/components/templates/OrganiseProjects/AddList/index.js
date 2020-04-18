@@ -27,7 +27,7 @@ const AddList = memo(({onSubmit}) => {
       {showForm ?
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <Input value={value} onChange={handleChange} placeholder='Enter List Title...'/>
+            <Input value={value} autoFocus onChange={handleChange} placeholder='Enter List Title...'/>
           </div>
           <div className="d-flex align-items-center">
             <div className="mr-3 d-inline-block">

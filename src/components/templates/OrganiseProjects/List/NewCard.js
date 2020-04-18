@@ -15,7 +15,7 @@ const NewCard = memo((props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="my-3">
-        <Input onChange={handleChange} value={value} placeholder='Enter Card Title...'/>
+        <Input onChange={handleChange} value={value} placeholder='Enter Card Title...' autoFocus/>
       </div>
       <div className="d-flex align-items-center">
         <div className="mr-3 d-inline-block">

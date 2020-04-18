@@ -27,13 +27,13 @@ class OrganiseProjects extends PureComponent {
       },
     }));
   };
-  handleDragStart = (cardIndex, cardObj)=>{
+  handleDragStart = (listId, cardIndex, cardObj)=>{
+    this.draggedCardListId = listId;
     this.dragedCardIndex = cardIndex;
     this.draggedCardObj = cardObj;
   };
-  handleDragOver = (listId, cardIndex)=>{
+  handleDragOverOnSameList = (listId, draggedOverCardIndex)=>{
     const {dragedCardIndex, state, draggedCardObj} = this;
-    const draggedOverCardIndex = cardIndex;
 
     if (dragedCardIndex === draggedOverCardIndex) {
       return;
@@ -49,6 +49,50 @@ class OrganiseProjects extends PureComponent {
         cards: items,
       },
     }));
+  }
+  handleDragOverOnEmptyList = (listId)=>{
+    const {draggedCardListId, state, draggedCardObj} = this;
+    const items = state[draggedCardListId].cards.filter((item) => item.id !== draggedCardObj.id);
+    this.setState((state)=>({
+      ...state,
+      [draggedCardListId]: {
+        ...state[draggedCardListId],
+        cards: items,
+      },
+      [listId]: {
+        ...state[listId],
+        cards: [this.draggedCardObj],
+      },
+    }));
+  }
+  handleDragOverOnDiffentList = (listId, draggedOverCardIndex)=>{
+    const {draggedCardListId, state, draggedCardObj} = this;
+    if (draggedOverCardIndex===undefined) {
+      this.handleDragOverOnEmptyList(listId);
+    } else {
+      const draggedList = state[draggedCardListId].cards.filter((item) => item.id !== draggedCardObj.id);
+      const dragOverList = state[listId].cards.filter((item) => item.id !== draggedCardObj.id);
+      dragOverList.splice(draggedOverCardIndex, 0, draggedCardObj);
+
+      this.setState((state)=>({
+        ...state,
+        [draggedCardListId]: {
+          ...state[draggedCardListId],
+          cards: draggedList,
+        },
+        [listId]: {
+          ...state[listId],
+          cards: dragOverList,
+        },
+      }));
+    }
+  }
+  handleDragOver = (listId, cardIndex)=>{
+    if (listId === this.draggedCardListId) {
+      this.handleDragOverOnSameList(listId, cardIndex);
+    } else {
+      this.handleDragOverOnDiffentList(listId, cardIndex);
+    }
   };
   handleCardEditComplete=(listId, cardIndex, value)=>{
     const {state} = this;

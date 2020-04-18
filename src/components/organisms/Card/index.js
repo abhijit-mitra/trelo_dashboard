@@ -37,7 +37,7 @@ const Card = memo((props) => {
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', e.target.parentNode);
     // e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
-    props.onDragStart(props.cardIndex, props.cardObj);
+    props.onDragStart(props.listId, props.cardIndex, props.cardObj);
   };
   if (deleted) {
     return <></>;

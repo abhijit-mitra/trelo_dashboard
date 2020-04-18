@@ -17,9 +17,15 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver,
   const handleCloseClick=()=>{
     setOpenNewCard(false);
   };
+  const handleDragOverOnList = ()=>{
+    if (cardData.length) {
+      return;
+    }
+    onDragOver(listId);
+  };
   return (
     <Column status={status}>
-      <div>
+      <div className="inline-block" onDragOver={handleDragOverOnList}>
         {cardData.map((elm, index)=>(
           <Card
             key={elm.id}
@@ -36,6 +42,7 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver,
           openNewCard?
             <NewCard onSubmit={handleSubmit} listId={Number(listId)} onCloseClick={handleCloseClick}/>:
             <Button label='+ Add Card' onClick={handleButtonClick}/>
+
         }
       </div>
     </Column>

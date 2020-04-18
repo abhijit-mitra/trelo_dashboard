@@ -4,6 +4,14 @@ You need to have NodeJS and NPM installed in your system to run the project loca
 
 ## Available Scripts
 
+First of all clone the repo, to clone the repo please use below command
+
+### `git clone https://github.com/abhijit-mitra/trelo_dashboard.git`
+
+Go to trelo_dashboard directory
+
+### `cd trelo_dashboard`
+
 To run the project locally, you can run below commands:
 
 ### `npm i && npm start`

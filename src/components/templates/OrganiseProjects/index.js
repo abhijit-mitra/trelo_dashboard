@@ -8,6 +8,7 @@ class OrganiseProjects extends PureComponent {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this.prevDragOverListId = null;
   }
   handleNewCardSubmit=(obj)=>{
     this.setState((state)=>({
@@ -33,58 +34,92 @@ class OrganiseProjects extends PureComponent {
     this.draggedCardObj = cardObj;
   };
   handleDragOverOnSameList = (listId, draggedOverCardIndex)=>{
-    const {dragedCardIndex, state, draggedCardObj} = this;
+    const {dragedCardIndex, state, draggedCardObj, prevDragOverListId} = this;
+    let prevDragOverList;
 
     if (dragedCardIndex === draggedOverCardIndex) {
       return;
     }
 
+    if (prevDragOverListId && prevDragOverListId!==listId) {
+      prevDragOverList = state[prevDragOverListId].cards.filter((item) => item.id !== draggedCardObj.id);
+    }
+
     const items = state[listId].cards.filter((item) => item.id !== draggedCardObj.id);
     items.splice(draggedOverCardIndex, 0, draggedCardObj);
 
-    this.setState((state)=>({
-      ...state,
-      [listId]: {
-        ...state[listId],
-        cards: items,
-      },
-    }));
+    this.setState((state)=>{
+      const obj = {
+        ...state,
+        [listId]: {
+          ...state[listId],
+          cards: items,
+        },
+      };
+      if (prevDragOverList) {
+        obj[prevDragOverListId].cards = prevDragOverList;
+      }
+      return obj;
+    });
+    this.prevDragOverListId = listId;
   }
   handleDragOverOnEmptyList = (listId)=>{
-    const {draggedCardListId, state, draggedCardObj} = this;
+    const {draggedCardListId, state, draggedCardObj, prevDragOverListId} = this;
+    let prevDragOverList;
+    if (prevDragOverListId && prevDragOverListId!==listId) {
+      prevDragOverList = state[prevDragOverListId].cards.filter((item) => item.id !== draggedCardObj.id);
+    }
     const items = state[draggedCardListId].cards.filter((item) => item.id !== draggedCardObj.id);
-    this.setState((state)=>({
-      ...state,
-      [draggedCardListId]: {
-        ...state[draggedCardListId],
-        cards: items,
-      },
-      [listId]: {
-        ...state[listId],
-        cards: [this.draggedCardObj],
-      },
-    }));
+    this.setState((state)=>{
+      const obj = {
+        ...state,
+        [draggedCardListId]: {
+          ...state[draggedCardListId],
+          cards: items,
+        },
+        [listId]: {
+          ...state[listId],
+          cards: [this.draggedCardObj],
+        },
+      };
+      if (prevDragOverList) {
+        obj[prevDragOverListId].cards = prevDragOverList;
+      }
+      return obj;
+    });
+    this.prevDragOverListId = listId;
   }
   handleDragOverOnDiffentList = (listId, draggedOverCardIndex)=>{
-    const {draggedCardListId, state, draggedCardObj} = this;
+    const {draggedCardListId, state, draggedCardObj, prevDragOverListId} = this;
+    let prevDragOverList;
     if (draggedOverCardIndex===undefined) {
       this.handleDragOverOnEmptyList(listId);
     } else {
       const draggedList = state[draggedCardListId].cards.filter((item) => item.id !== draggedCardObj.id);
+      if (prevDragOverListId && prevDragOverListId!==listId) {
+        prevDragOverList = state[prevDragOverListId].cards.filter((item) => item.id !== draggedCardObj.id);
+      }
       const dragOverList = state[listId].cards.filter((item) => item.id !== draggedCardObj.id);
       dragOverList.splice(draggedOverCardIndex, 0, draggedCardObj);
 
-      this.setState((state)=>({
-        ...state,
-        [draggedCardListId]: {
-          ...state[draggedCardListId],
-          cards: draggedList,
-        },
-        [listId]: {
-          ...state[listId],
-          cards: dragOverList,
-        },
-      }));
+      this.setState((state)=>{
+        const obj = {
+          ...state,
+          [draggedCardListId]: {
+            ...state[draggedCardListId],
+            cards: draggedList,
+          },
+          [listId]: {
+            ...state[listId],
+            cards: dragOverList,
+          },
+        };
+        if (prevDragOverList) {
+          obj[prevDragOverListId].cards = prevDragOverList;
+        }
+        return obj;
+      });
+      this.prevDragOverListId = listId;
     }
   }
   handleDragOver = (listId, cardIndex)=>{

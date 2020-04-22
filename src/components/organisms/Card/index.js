@@ -6,7 +6,6 @@ import {Input, Button} from '../../atoms';
 const Card = memo((props) => {
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(props.cardObj.name);
-  const [deleted, setDeleted] = useState(false);
 
   useEffect(()=>{
     setValue(props.cardObj.name);
@@ -19,8 +18,7 @@ const Card = memo((props) => {
     setEditMode((state)=>(!state));
   };
   const handleDelete = ()=>{
-    props.onCardDelete();
-    setDeleted(true);
+    props.onCardDelete(props.listId, props.cardIndex);
   };
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -41,9 +39,6 @@ const Card = memo((props) => {
     // e.dataTransfer.setData('text/html', 'Dragme');
     props.onDragStart(props.listId, props.cardIndex, props.cardObj);
   };
-  if (deleted) {
-    return <></>;
-  }
   return (
     <div className='wrapper'
       onDragEnter={handleDragOver}

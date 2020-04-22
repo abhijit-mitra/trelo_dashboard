@@ -34,12 +34,8 @@ class OrganiseProjects extends PureComponent {
     this.draggedCardObj = cardObj;
   };
   handleDragOverOnSameList = (listId, draggedOverCardIndex)=>{
-    const {dragedCardIndex, state, draggedCardObj, prevDragOverListId} = this;
+    const {state, draggedCardObj, prevDragOverListId} = this;
     let prevDragOverList;
-
-    if (dragedCardIndex === draggedOverCardIndex) {
-      return;
-    }
 
     if (prevDragOverListId && prevDragOverListId!==listId) {
       prevDragOverList = state[prevDragOverListId].cards.filter((item) => item.id !== draggedCardObj.id);

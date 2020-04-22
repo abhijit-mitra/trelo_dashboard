@@ -34,15 +34,20 @@ const Card = memo((props) => {
   };
 
   const handleDragStart =(e)=>{
-    e.dataTransfer.effectAllowed = 'pointer';
-    e.dataTransfer.setData('text/html', e.target.parentNode);
+    // e.dataTransfer.effectAllowed = 'pointer';
+    // e.dataTransfer.effectAllowed = 'copyMove';
+    // e.target.style.cursor='pointer';
+    // e.dataTransfer.setData('text/html', e.target.parentNode);
+    // e.dataTransfer.setData('text/html', 'Dragme');
     props.onDragStart(props.listId, props.cardIndex, props.cardObj);
   };
   if (deleted) {
     return <></>;
   }
   return (
-    <div className='wrapper' onDragOver={handleDragOver}>
+    <div className='wrapper'
+      onDragEnter={handleDragOver}
+    >
       <div className="card p-2 my-3 cursor-pointer"
         draggable={true}
         onDragStart={handleDragStart}

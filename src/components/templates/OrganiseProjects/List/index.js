@@ -25,7 +25,7 @@ const List = memo(({status, cardData, listId, onSubmit, onDragStart, onDragOver,
   };
   return (
     <Column status={status}>
-      <div className="inline-block" onDragOver={handleDragOverOnList}>
+      <div className="inline-block" onDragEnter={handleDragOverOnList}>
         {cardData.map((elm, index)=>(
           <Card
             key={elm.id}

@@ -6,7 +6,6 @@ import {Input, Button} from '../../atoms';
 const Card = memo((props) => {
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(props.cardObj.name);
-  const [deleted, setDeleted] = useState(false);
 
   useEffect(()=>{
     setValue(props.cardObj.name);
@@ -19,8 +18,7 @@ const Card = memo((props) => {
     setEditMode((state)=>(!state));
   };
   const handleDelete = ()=>{
-    props.onCardDelete();
-    setDeleted(true);
+    props.onCardDelete(props.listId, props.cardIndex);
   };
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -34,15 +32,12 @@ const Card = memo((props) => {
   };
 
   const handleDragStart =(e)=>{
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', e.target.parentNode);
     props.onDragStart(props.listId, props.cardIndex, props.cardObj);
   };
-  if (deleted) {
-    return <></>;
-  }
   return (
-    <div className='wrapper' onDragOver={handleDragOver}>
+    <div className='wrapper'
+      onDragEnter={handleDragOver}
+    >
       <div className="card p-2 my-3 cursor-pointer"
         draggable={true}
         onDragStart={handleDragStart}

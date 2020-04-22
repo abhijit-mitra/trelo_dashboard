@@ -34,12 +34,8 @@ class OrganiseProjects extends PureComponent {
     this.draggedCardObj = cardObj;
   };
   handleDragOverOnSameList = (listId, draggedOverCardIndex)=>{
-    const {dragedCardIndex, state, draggedCardObj, prevDragOverListId} = this;
+    const {state, draggedCardObj, prevDragOverListId} = this;
     let prevDragOverList;
-
-    if (dragedCardIndex === draggedOverCardIndex) {
-      return;
-    }
 
     if (prevDragOverListId && prevDragOverListId!==listId) {
       prevDragOverList = state[prevDragOverListId].cards.filter((item) => item.id !== draggedCardObj.id);
@@ -141,6 +137,18 @@ class OrganiseProjects extends PureComponent {
       },
     }));
   }
+  handleCardDelete=(listId, cardIndex)=>{
+    const {state} = this;
+    const cards = [...state[listId].cards];
+    cards.splice(cardIndex, 1);
+    this.setState((state)=>({
+      ...state,
+      [listId]: {
+        ...state[listId],
+        cards,
+      },
+    }));
+  }
   render() {
     const {state,
       handleNewCardSubmit,
@@ -148,6 +156,7 @@ class OrganiseProjects extends PureComponent {
       handleDragOver,
       handleNewListSubmit,
       handleCardEditComplete,
+      handleCardDelete,
     } = this;
     return (
       <Container>
@@ -162,6 +171,7 @@ class OrganiseProjects extends PureComponent {
               onDragStart={handleDragStart}
               onDragOver={handleDragOver}
               onCardEditComplete={handleCardEditComplete}
+              onCardDelete={handleCardDelete}
             />
           ))
         }

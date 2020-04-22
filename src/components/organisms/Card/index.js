@@ -32,11 +32,6 @@ const Card = memo((props) => {
   };
 
   const handleDragStart =(e)=>{
-    // e.dataTransfer.effectAllowed = 'pointer';
-    // e.dataTransfer.effectAllowed = 'copyMove';
-    // e.target.style.cursor='pointer';
-    // e.dataTransfer.setData('text/html', e.target.parentNode);
-    // e.dataTransfer.setData('text/html', 'Dragme');
     props.onDragStart(props.listId, props.cardIndex, props.cardObj);
   };
   return (
